@@ -1,0 +1,12 @@
+directory to store model results from D'Alessio
+
+homepage: https://www.cfa.harvard.edu/youngstars/dalessio/
+
+Tc	: midplane temperature
+Tirr	: irradiation temperature 
+To	: surface temperature
+Tvis	: viscous effective temperature
+H	: hydrostatis scale height
+Ztauss	: irradiation surface height
+Zinf	: surface height
+
