@@ -2,6 +2,72 @@
 # some tools 
 import numpy as np
 import pdb
+import os
+
+def getDiskName(datdir='data', Tstar=4000, Age=1, 
+        Rdisk=300, dM=1e-9, alpha=0.001, amax=1, p=3.5):
+    """ get the name of the file for disk properties based on the parameters
+    datdir = str
+        the directory where data is stored
+    Tstar = 4000 [K]
+        the star effective temperature
+    Age = 1, 10 [Myr]
+        the age of the star
+    Rdisk = 300, 100	[AU]
+        the radius of the disk
+    dM = 1e-9, 1e-8, 1e-7, 1e-6 [Msun/yr]
+        accretion rate
+    alpha = 0.001, 0.01, 0.1
+        viscosity parameter
+    amax = 1, 10, 1e2, 1e3, 1e4, 1e5 [micron]
+        maximum grain size
+    p = 3.5, 2.5 
+        size distribution
+    """
+    # determine directory
+    fdir = os.path.join(datdir, 'T%d_%dmyr'%(Tstar, Age))
+
+    # determine the specific name
+    # grain size power-law
+    if p == 3.5:
+        plaw = 'p3p5'
+    elif p == 2.5:
+        plaw = 'p2p5'
+    else:
+        raise ValueError('poor input for p')
+
+    # maximum grain size
+    if amax == 1:
+        asize = '1p0'
+    elif amax == 10:
+        asize = '10p0'
+    elif amax= 1e2:
+        asize = '100'
+    elif amax== 1e3:
+        asize = '1mm'
+    elif amax == 1e4:
+        asize = '1cm'
+    elif amax == 1e5:
+        asize = '10cm'
+    else:
+        raise ValueError('bad input for amax')
+
+    # Rhole which depends on accretion rate
+    if dM == 1e-6:
+        Rhole = 22
+    elif dM == 1e-7:
+        Rhole = 11
+    elif dM == 1e-8:
+        Rhole = 9
+    elif dM == 1e-9:
+        Rhole = 9
+    else:
+        raise ValueError('bad input for dM')
+
+    fname = ('prop.'+'rd%d.'%Rdisk + 'rh%d.'%Rhole + 'mp1em'%abs(np.log10(dM)) + 
+        'a0p01.irr.abpoll.' + plaw + 'amax%s'%asize + 'h.dat')
+
+    return os.path.join(fdir, fname)
 
 def readDAlessio(fname):
     # reads D'Allesio disk. output in cgs

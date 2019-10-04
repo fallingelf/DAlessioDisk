@@ -1,5 +1,5 @@
 # panel_plot.py
-# some plots
+# plot series of accretion rate
 import numpy as np
 import matplotlib.pyplot as plt
 import zylconst
@@ -7,11 +7,12 @@ import utils
 import os
 
 # ==== settings ====
-datadir = 'data'
+datdir = 'data'
 
-datname = ['prop.rd300.rh11.mp1em8.a0p01.irr.abpoll.p3p5.amax100.h.dat']
-tag = ['1']
-ndat = len(datname)
+# properties to iterate
+prop = [1e-9, 1e-8, 1e-7, 1e-6]	# accretion rate
+tag = ['1e-9', '1e-8', '1e-7', 1e-6]
+ndat = len(prop)
 
 phys = ['Tvis', 'Tirr','H','Sigma'] # the physical keys to be plotted
 nphys = len(phys)
@@ -21,7 +22,10 @@ yunit = [1, 1, zylconst.AU, 1]
 # ==== read ====
 dat = []
 for ii in range(ndat):
-    fname = os.path.join(datadir, datname[ii])
+    dM = prop[ii]
+    fname = utils.getDiskName(datdir=datdir, Tstar=4000, Age=1, 
+        dM=dM, alpha=0.01, amax=10, p=3.5)
+
     dum = utils.readDAlessio(fname)
     dat.append(dum)
 
