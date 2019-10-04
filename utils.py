@@ -4,7 +4,8 @@ import numpy as np
 import pdb
 import os
 
-def getDiskName(datdir='data', Tstar=4000, Age=1, 
+def getDiskName(datdir='/scratch/zdl3gk/mainProjects/DAlessioDisk/data', 
+        Tstar=4000, Age=1, 
         Rdisk=300, dM=1e-9, alpha=0.001, amax=1, p=3.5):
     """ get the name of the file for disk properties based on the parameters
     datdir = str
