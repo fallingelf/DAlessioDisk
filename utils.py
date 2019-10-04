@@ -41,9 +41,9 @@ def getDiskName(datdir='data', Tstar=4000, Age=1,
         asize = '1p0'
     elif amax == 10:
         asize = '10p0'
-    elif amax= 1e2:
+    elif amax == 1e2:
         asize = '100'
-    elif amax== 1e3:
+    elif amax == 1e3:
         asize = '1mm'
     elif amax == 1e4:
         asize = '1cm'
@@ -64,8 +64,8 @@ def getDiskName(datdir='data', Tstar=4000, Age=1,
     else:
         raise ValueError('bad input for dM')
 
-    fname = ('prop.'+'rd%d.'%Rdisk + 'rh%d.'%Rhole + 'mp1em'%abs(np.log10(dM)) + 
-        'a0p01.irr.abpoll.' + plaw + 'amax%s'%asize + 'h.dat')
+    fname = ('prop.'+'rd%d.'%Rdisk + 'rh%d.'%Rhole + 'mp1em%d.'%abs(np.log10(dM)) + 
+        'a0p01.irr.abpoll.' + '%s.'%plaw + 'amax%s.'%asize + 'h.dat')
 
     return os.path.join(fdir, fname)
 
